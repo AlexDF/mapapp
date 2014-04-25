@@ -1,14 +1,14 @@
 var AppRouter = Backbone.Router.extend({
   routes: {
     "": "nearbySchools"
-  }
-
-  initialize: function() {
-
   },
 
-  nearbySchools: function() {
+  /*initialize: function() {
 
+  },*/
+
+  nearbySchools: function() {
+    $('#content').html('backbone');
   }
 
 
