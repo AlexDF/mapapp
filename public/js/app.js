@@ -29,7 +29,8 @@ var AppRouter = Backbone.Router.extend({
   }, // end nearbySchools
 
   searchPage: function() {
-
+    var searchView = new SearchView();
+    $('#content').html(searchView.render().el);
   }
 
 });
