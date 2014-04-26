@@ -1,32 +1,36 @@
 var AppRouter = Backbone.Router.extend({
   routes: {
-    "": "nearbySchools",
-    "map": "showMap",
+    "": "getMyLocation",
+    //"map": "showMap",
     "search": "searchPage"
   },
 
   initialize: function() {
     this.mapView = new MapView();
     this.geocoder = new google.maps.Geocoder();
-  },
-
-  showMap: function() {
     
-    this.mapView.render();
   },
 
-  nearbySchools: function() {
+  getMyLocation: function() {
+    var mapView = this.mapView;
     
     if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
-        //var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        $('#content').html(position.coords.latitude);
-        
+        mapView.render(position.coords.latitude, position.coords.longitude);
       });
     } else {
       // Browser doesn't support Geolocation
     }
-  }, // end nearbySchools
+    
+  }, 
+
+  /*showMap: function() {
+    this.getMyLocation();
+    //this.mapView.render(myLocation);
+    //$('#content').html(this.myLocation);
+  },*/
+
+  
 
   searchPage: function() {
     var searchView = new SearchView();
