@@ -7,8 +7,8 @@ var MapView = Backbone.View.extend({
       center: new google.maps.LatLng(latitude, longitude)
     };
     var mapDiv = document.getElementById('content');
-    var map = new google.maps.Map(mapDiv, mapOptions);
-    //$('#content').html(myLoc);
+    this.map = new google.maps.Map(mapDiv, mapOptions);
+    
   }
   
 
