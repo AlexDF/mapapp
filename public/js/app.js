@@ -35,21 +35,21 @@ var AppRouter = Backbone.Router.extend({
         
         service.nearbySearch(request, function(results, status) {
           if (status == google.maps.places.PlacesServiceStatus.OK) {
-
+            var name; 
             for (var i = 0; i < results.length; i++) {
-              var placeLoc = results[i].geometry.location;
+              //var placeLoc = results[i].geometry.location;
               var marker = new google.maps.Marker({
                 map: mapView.map,
                 position: results[i].geometry.location
               });
-
-              google.maps.event.addListener(marker, 'click', function() {
-                infoWindow.setContent(result[i].name);
+              name = i.toString();
+              google.maps.event.addListener(marker, 'click', function() {               
+		infoWindow.setContent(name);
                 infoWindow.open(mapView.map, this);
               });
 
             }
-
+              
 	  }
         });
 
