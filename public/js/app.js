@@ -6,13 +6,19 @@ var AppRouter = Backbone.Router.extend({
   },
 
   initialize: function() {
-    this.mapView = new MapView();
+    this.mapModel = new MapModel();
+    this.mapView = new MapView(
+      {
+        model: this.mapModel
+      }
+    );
     this.geocoder = new google.maps.Geocoder();
     this.infoWindow = new google.maps.InfoWindow();
   },
 
   getMyLocation: function() {
     var mapView = this.mapView;
+    var mapModel = this.mapModel;
     var infoWindow = this.infoWindow;
 
     if(navigator.geolocation) {
@@ -20,14 +26,16 @@ var AppRouter = Backbone.Router.extend({
       navigator.geolocation.getCurrentPosition(function(position) {
         
         var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        mapView.render( pos.lat(), pos.lng() );
+        mapModel.set('latitude', pos.lat());
+        mapModel.set('longitude', pos.lng());
+        mapView.render();
         
 
       
         var request = {
           location: pos,
           radius: 3000,
-          types: ['school', 'university']
+          types: ['school']
         };
 
         var service = new google.maps.places.PlacesService(mapView.map);

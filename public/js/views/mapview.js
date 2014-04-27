@@ -1,10 +1,10 @@
 var MapView = Backbone.View.extend({
   
-  render: function(latitude, longitude) {
+  render: function() {
    
    var mapOptions = {
-      zoom: 14,
-      center: new google.maps.LatLng(latitude, longitude)
+      zoom: this.model.get('zoom'),
+      center: new google.maps.LatLng(this.model.get('latitude'), this.model.get('longitude'))
     };
     var mapDiv = document.getElementById('content');
     this.map = new google.maps.Map(mapDiv, mapOptions);
