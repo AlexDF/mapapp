@@ -12,14 +12,25 @@ var AppRouter = Backbone.Router.extend({
         model: this.mapModel
       }
     );
+    
+    this.markerModel = new MarkerModel();
+    this.markerView = new MarkerView(
+      {
+        model: this.markerModel
+      }
+    );
+
     this.geocoder = new google.maps.Geocoder();
-    this.infoWindow = new google.maps.InfoWindow();
+    //this.infoWindow = new google.maps.InfoWindow();
   },
 
   getMyLocation: function() {
     var mapView = this.mapView;
     var mapModel = this.mapModel;
-    var infoWindow = this.infoWindow;
+    var markerView = this.markerView;
+    var markerModel = this.markerModel;
+
+    //var infoWindow = this.infoWindow;
 
     if(navigator.geolocation) {
       
@@ -46,17 +57,10 @@ var AppRouter = Backbone.Router.extend({
             
             for (var i = 0; i < results.length; i++) {
               //var placeLoc = results[i].geometry.location;
-              var marker = new google.maps.Marker({
-                map: mapView.map,
-                position: results[i].geometry.location,
-		name: results[i].name
-              });
-             
-              google.maps.event.addListener(marker, 'click', function() {               
-		infoWindow.setContent(this.name);
-                infoWindow.open(mapView.map, this);
-              });
-
+              markerModel.set('map', mapView.map);
+              markerModel.set('position', results[i].geometry.location);
+              markerModel.set('name', results[i].name);
+              markerView.render();
             }
               
 	  }
