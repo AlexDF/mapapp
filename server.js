@@ -28,7 +28,7 @@ var schoolSchema = mongoose.Schema({
 var School = mongoose.model('School', schoolSchema);
 
 
-app.post('/findschool', function(req, res) {
+/*app.post('/findschool', function(req, res) {
     School.find({ schoolName: req.body.school_name }, function(err, school) {
       if(err) {console.log('Error: ' + err);}
       else {
@@ -36,7 +36,21 @@ app.post('/findschool', function(req, res) {
         res.send('<a href="/#/">Return</a>');
       }
     }); // end School.find()
+}); // end app.post('/findschool',)*/
+
+
+
+app.get('/findschool', function(req, res) {
+    School.find({ schoolName: "Kearny High School" }, function(err, school) {
+      if(err) {console.log('Error: ' + err);}
+      else {
+        var match = school[0];
+        res.send(match);
+      }
+    }); // end School.find()
 }); // end app.post('/findschool',)
+
+
 
 
 app.get('/hello', function(req, res) {

@@ -1,8 +1,8 @@
 var AppRouter = Backbone.Router.extend({
   routes: {
     "": "getMyLocation",
-    //"map": "showMap",
-    "search": "searchPage"
+    "search": "searchPage",
+    "test": "getrecord"
   },
 
   initialize: function() {
@@ -21,7 +21,13 @@ var AppRouter = Backbone.Router.extend({
     );
 
     this.geocoder = new google.maps.Geocoder();
-    //this.infoWindow = new google.maps.InfoWindow();
+  },
+
+  getrecord: function() {
+    $.get("/findschool",function(data,status){
+      $('#content').html(data.schoolName);
+    });
+
   },
 
   getMyLocation: function() {
@@ -29,8 +35,6 @@ var AppRouter = Backbone.Router.extend({
     var mapModel = this.mapModel;
     var markerView = this.markerView;
     var markerModel = this.markerModel;
-
-    //var infoWindow = this.infoWindow;
 
     if(navigator.geolocation) {
       
@@ -56,7 +60,6 @@ var AppRouter = Backbone.Router.extend({
           if (status == google.maps.places.PlacesServiceStatus.OK) {
             
             for (var i = 0; i < results.length; i++) {
-              //var placeLoc = results[i].geometry.location;
               markerModel.set('map', mapView.map);
               markerModel.set('position', results[i].geometry.location);
               markerModel.set('name', results[i].name);
@@ -71,15 +74,7 @@ var AppRouter = Backbone.Router.extend({
       // Browser doesn't support Geolocation
     }
     
-  }, 
-
-  /*showMap: function() {
-    this.getMyLocation();
-    //this.mapView.render(myLocation);
-    //$('#content').html(this.myLocation);
-  },*/
-
-  
+  },
 
   searchPage: function() {
     var searchView = new SearchView();
