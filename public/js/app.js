@@ -34,7 +34,7 @@ var AppRouter = Backbone.Router.extend({
       
         var request = {
           location: pos,
-          radius: 3000,
+          radius: 2000,
           types: ['school']
         };
 
@@ -43,16 +43,17 @@ var AppRouter = Backbone.Router.extend({
         
         service.nearbySearch(request, function(results, status) {
           if (status == google.maps.places.PlacesServiceStatus.OK) {
-            var name; 
+            
             for (var i = 0; i < results.length; i++) {
               //var placeLoc = results[i].geometry.location;
               var marker = new google.maps.Marker({
                 map: mapView.map,
-                position: results[i].geometry.location
+                position: results[i].geometry.location,
+		name: results[i].name
               });
-              name = i.toString();
+             
               google.maps.event.addListener(marker, 'click', function() {               
-		infoWindow.setContent(name);
+		infoWindow.setContent(this.name);
                 infoWindow.open(mapView.map, this);
               });
 
