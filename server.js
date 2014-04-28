@@ -40,8 +40,8 @@ var School = mongoose.model('School', schoolSchema);
 
 
 
-app.get('/findschool', function(req, res) {
-    School.find({ schoolName: "Kearny High School" }, function(err, school) {
+app.get('/findschool/:school', function(req, res) {
+    School.find({ schoolName: req.params.school }, function(err, school) {
       if(err) {console.log('Error: ' + err);}
       else {
         var match = school[0];

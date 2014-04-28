@@ -3,7 +3,7 @@ var AppRouter = Backbone.Router.extend({
     "": "getMyLocation",
     "search": "searchPage",
     //"test": "getrecord",
-    "find": "getrecord",
+    "find/:school": "getrecord",
     "resultOnMap": "markResult"
   },
 
@@ -32,10 +32,10 @@ var AppRouter = Backbone.Router.extend({
     this.geocoder = new google.maps.Geocoder();
   },
 
-  getrecord: function() {
+  getrecord: function(school) {
     var resultView = this.resultView;
     var resultModel = this.resultModel;
-    $.get("/findschool",function(data,status){
+    $.get("/findschool/" + school, function(data,status){
       resultModel.set('schoolName', data.schoolName);
       resultModel.set('city', data.city);
       resultModel.set('state', data.state);

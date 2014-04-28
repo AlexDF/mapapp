@@ -2,6 +2,9 @@ a {
   text-decoration: none;
   color: #000;
 }
+#goButton{
+  cursor: pointer;
+}
 
 #goButton {
   width:36px;

@@ -1,14 +1,16 @@
 var SearchView = Backbone.View.extend({
 
+  initialize: function() {
+    this.goButtonHref = '<script>function weh() { document.location.href = "/#/find/" + $("#school_name").val();}</script>';
+  },
+
   render: function() {
     var markup = '<div>' + 
-      //'<form method="post" action="/findschool">' +
         '<img src="../../img/glass.jpg"><label for="school_name">Search</label>' + '<br>' +
-        '<input type="text" name="school_name" placeholder="Enter a School Name">' +
-        '<a href="/#/find" style="text-decoration:none; color: black;"><div id="goButton">Go</div></a>' +
-        //+ '<input type="submit" value="Search">' + '</form>' + 
-      '</div>';
-    this.$el.html(markup);
+        '<input type="text" id="school_name" placeholder="Enter a School Name">' +
+        '<a id="goButton" onclick="weh()"><div>Go</div></a>' + 
+        '</div>';
+    this.$el.html(this.goButtonHref + markup);
     return this;
   }
 
