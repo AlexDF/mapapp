@@ -33,7 +33,7 @@ var School = mongoose.model('School', schoolSchema);
       if(err) {console.log('Error: ' + err);}
       else {
         var match = school[0];
-        res.send('<a href="/#/">Return</a>');
+        res.send(match);
       }
     }); // end School.find()
 }); // end app.post('/findschool',)*/
@@ -48,7 +48,7 @@ app.get('/findschool', function(req, res) {
         res.send(match);
       }
     }); // end School.find()
-}); // end app.post('/findschool',)
+});
 
 
 
