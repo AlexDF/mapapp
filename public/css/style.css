@@ -1,0 +1,22 @@
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+#goButton {
+  width:36px;
+  height:36px;
+  border:1px solid green;
+  border-radius: 5px;
+  background-color:lime;
+  display:inline-block;
+  line-height:36px;
+  text-align: center;
+}
+
+.resultItem {
+  width: 100%;
+  background-color:#F6D396;
+  border:1px solid #AAA;
+  text-align: center;
+}
