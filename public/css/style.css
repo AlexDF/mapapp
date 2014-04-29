@@ -2,7 +2,7 @@ a {
   text-decoration: none;
   color: #000;
 }
-#goButton{
+#resultItem {
   cursor: pointer;
 }
 
@@ -12,6 +12,7 @@ a {
   border:1px solid green;
   border-radius: 5px;
   background-color:lime;
+  cursor: pointer;
   display:inline-block;
   line-height:36px;
   text-align: center;
@@ -22,4 +23,11 @@ a {
   background-color:#F6D396;
   border:1px solid #AAA;
   text-align: center;
+}
+
+.infoWindowText {
+  font: 120% Helvetica, Arial, sans-serif;
+}
+#infoWindowTitle {
+  font-weight: bold;
 }

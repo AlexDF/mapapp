@@ -3,7 +3,8 @@ var ResultModel = Backbone.Model.extend({
   defaults: {
     schoolName: "Some School",
     city: "Podunk",
-    state: "NJ"
+    state: "NJ",
+    rating: "NR"
   }
 
 });

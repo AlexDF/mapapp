@@ -4,7 +4,7 @@ var AppRouter = Backbone.Router.extend({
     "search": "searchPage",
     //"test": "getrecord",
     "find/:school": "getrecord",
-    "resultOnMap": "markResult"
+    "resultOnMap/:school/:city/:state/:rating": "markResult"
   },
 
   initialize: function() {
@@ -39,6 +39,7 @@ var AppRouter = Backbone.Router.extend({
       resultModel.set('schoolName', data.schoolName);
       resultModel.set('city', data.city);
       resultModel.set('state', data.state);
+      resultModel.set('rating', data.rating);
       resultView.render();
     });
 
@@ -77,6 +78,7 @@ var AppRouter = Backbone.Router.extend({
               markerModel.set('map', mapView.map);
               markerModel.set('position', results[i].geometry.location);
               markerModel.set('name', results[i].name);
+              
               markerView.render();
             }
               
@@ -93,7 +95,36 @@ var AppRouter = Backbone.Router.extend({
   searchPage: function() {
     var searchView = new SearchView();
     $('#content').html(searchView.render().el);
+  },
+
+  markResult: function(school, city, state, rating) {
+    //$('#content').html(school + city + state);
+    var mapView = this.mapView;
+    var mapModel = this.mapModel;
+    
+    var markerView = this.markerView;
+    var markerModel = this.markerModel;
+
+    this.geocoder.geocode( {'address': school + ' ' + city + ' ' + state}, function(results, status) {
+      if ( status == google.maps.GeocoderStatus.OK ) {
+        mapModel.set('latitude', results[0].geometry.location.lat());
+        mapModel.set('longitude', results[0].geometry.location.lng());
+        mapView.render();
+
+        markerModel.set('map', mapView.map);
+        markerModel.set('position', results[0].geometry.location);
+        markerModel.set('name', school);
+        markerModel.set('rating', rating);
+        markerView.render(rating);
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+ 
+
   }
+
+
 
 });
 
