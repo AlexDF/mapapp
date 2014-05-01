@@ -73,15 +73,26 @@ var AppRouter = Backbone.Router.extend({
         
         service.nearbySearch(request, function(results, status) {
           if (status == google.maps.places.PlacesServiceStatus.OK) {
-            
+            var query;
             for (var i = 0; i < results.length; i++) {
               markerModel.set('map', mapView.map);
               markerModel.set('position', results[i].geometry.location);
               markerModel.set('name', results[i].name);
               
+             query = $.ajax({
+                url: '/findschool/' + results[i].name,
+                async: false
+                }).done(function(data) {
+                  return data;
+                });
+              if(query.responseJSON !== undefined) {
+               markerModel.set('rating', query.responseJSON.rating);
+              } else {
+                markerModel.set('rating', 'NR');
+              }
               markerView.render();
             }
-              
+            //markerView.render();  
 	  }
         });
 
@@ -115,7 +126,7 @@ var AppRouter = Backbone.Router.extend({
         markerModel.set('position', results[0].geometry.location);
         markerModel.set('name', school);
         markerModel.set('rating', rating);
-        markerView.render(rating);
+        markerView.render();
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
