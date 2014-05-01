@@ -41,7 +41,7 @@ var School = mongoose.model('School', schoolSchema);
 
 
 app.get('/findschool/:school', function(req, res) {
-    School.find({ schoolName: req.params.school }, function(err, school) {
+    School.find({ schoolName: req.params.school.toUpperCase() }, function(err, school) {
       if(err) {console.log('Error: ' + err);}
       else {
         var match = school[0];
