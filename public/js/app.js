@@ -92,7 +92,7 @@ var AppRouter = Backbone.Router.extend({
               }
               markerView.render();
             }
-            //markerView.render();  
+
 	  }
         });
 
@@ -143,4 +143,16 @@ var app = new AppRouter();
 
 $(function() {
   Backbone.history.start();
+
+$('#content').on("swipeleft", function() { 
+    //window.location.href='/#/search';
+    $.mobile.navigate('/#/search', {transition: "slide"});
+  });
+
+   
+     
+
 });
+
+
+

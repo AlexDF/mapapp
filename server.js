@@ -28,18 +28,6 @@ var schoolSchema = mongoose.Schema({
 var School = mongoose.model('School', schoolSchema);
 
 
-/*app.post('/findschool', function(req, res) {
-    School.find({ schoolName: req.body.school_name }, function(err, school) {
-      if(err) {console.log('Error: ' + err);}
-      else {
-        var match = school[0];
-        res.send(match);
-      }
-    }); // end School.find()
-}); // end app.post('/findschool',)*/
-
-
-
 app.get('/findschool/:school', function(req, res) {
     School.find({ schoolName: req.params.school.toUpperCase() }, function(err, school) {
       if(err) {console.log('Error: ' + err);}
@@ -51,11 +39,6 @@ app.get('/findschool/:school', function(req, res) {
 });
 
 
-
-
-app.get('/hello', function(req, res) {
-  res.send("hello");
-});
 
 app.listen(3000, function() {
   console.log("Listening at port: 3000");
