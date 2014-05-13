@@ -5,8 +5,9 @@ var SearchView = Backbone.View.extend({
   },
 
   render: function() {
+    $('#content').css({'background-color': '#FFF'});
     var markup = '<div>' + 
-        '<img src="../../img/glass.jpg"><label for="school_name">Search</label>' + '<br>' +
+        '<br><label id="search_label" for="school_name">Search</label>&nbsp;<img id="glass_img" src="../../img/glass.jpg">' + '<br>' +
         '<input type="text" id="school_name" placeholder="Enter a School Name">' +
         '<a id="goButton" onclick="fetchIt()"><div>Go</div></a>' + 
         '</div>';

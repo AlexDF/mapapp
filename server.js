@@ -39,7 +39,6 @@ app.get('/findschool/:school', function(req, res) {
 });
 
 
-
 app.listen(3000, function() {
   console.log("Listening at port: 3000");
 });
